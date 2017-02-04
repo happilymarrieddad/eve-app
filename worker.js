@@ -1,14 +1,14 @@
 var fs = require('fs'),
     express = require('express'),
     serveStatic = require('serve-static'),
-    env = require('node-env-file'),
+    config = require('config.json'),
     path = require('path')
 
 module.exports.run = function (worker) {
     console.log('   >> Worker PID:', process.pid)
 
     var app = require('express')()
-    env('.env')
+    process.env = config
     var pool = require('mysql').createPool({
         host            : process.env.DB_HOST,
         user            : process.env.DB_USERNAME,

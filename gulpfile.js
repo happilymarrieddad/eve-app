@@ -1,5 +1,5 @@
 var gulp = require('gulp'),
-	env = require('node-env-file'),
+	config = require('config.json'),
 	async = require('async'),
 	templatizer = require('templatizer'),
 	SocketCluster = require('socketcluster').SocketCluster,
@@ -8,7 +8,7 @@ var gulp = require('gulp'),
 	moment = require('moment'),
 	exec = require('child_process').exec
 
-env(__dirname+'/.env')
+process.env = config
 
 gulp.task('default',['templates','start-server']);
 
