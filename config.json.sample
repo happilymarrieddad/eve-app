@@ -1,0 +1,20 @@
+{
+	"ENV":"development",
+	"PORT":3000,
+	"ADDRESS":"localhost",
+
+	"DB_HOST":"localhost",
+	"DB_DATABASE":"eve_app",
+	"DB_USERNAME":"root",
+	"DB_PASSWORD":"",
+
+	"MINIFY":0,
+
+	"REDIS_ADDRESS":"localhost",
+	"REDIS_PORT":6379,
+
+	"ENV_CA_PATH":"/var/cert/bundle.crt",
+	"ENV_KEY_PATH":"/var/cert/myserver.key",
+	"ENV_CRT_PATH":"/var/cert/myserver.crt",
+	"SESSION_SECRET":"keyboard-cat"
+}

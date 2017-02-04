@@ -1,0 +1,15 @@
+div.row(style='margin-top:100px')
+	div.col-md-6.col-md-offset-3
+		div.panel.panel-default
+			div.panel-heading
+				h5 Please Login
+			div.panel-body
+				div.form-group
+					label Email
+					input.form-control(type='email',v-model='email')
+				div.form-group
+					label Password
+					input.form-control(type='password',v-model='password')
+				hr
+				div.form-group
+					button.btn.btn-success(type='button',@click.prevent='login') Create

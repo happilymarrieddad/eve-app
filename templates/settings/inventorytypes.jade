@@ -1,0 +1,42 @@
+ol.breadcrumb
+	li Inventory Types
+	li
+		button.btn.btn-success.btn-xs(type='button',@click.prevent='update') Update Inventory Types
+	li
+		button.btn.btn-success.btn-xs(type='button',@click.prevent='updatePrices') Update Inventory Types Prices
+	li
+		button.btn.btn-success.btn-xs(type='button',@click.prevent='updateInventoryTypes') Update Blueprint Inventory Types
+	input.no-slash.pull-right.form-control(style="margin-top:-0.15%;width:180px;height:28px;padding-left:5px",placeholder="Inventory Type Search",v-model='search')
+
+div.table-responsive
+	table.table.table-striped.table-hover.table-condensed
+		thead
+			tr
+				th ID
+				th Name
+				th Eve ID
+				th Market Group Name
+				th Low Price
+				th High Price
+				th Avg Price
+				th
+		tbody(v-show="inventory_types.length > 0")
+			tr(v-for="inventory_type in inventory_types")
+				th
+					strong {{ inventory_type.id }}
+				td {{ inventory_type.name }}
+				td {{ inventory_type.eve_id }}
+				td {{ inventory_type.market_group_name }}
+				td {{ inventory_type.low_price | isk }}
+				td {{ inventory_type.high_price | isk }}
+				td {{ inventory_type.avg_price | isk }}
+				td.text-right
+					//- button.btn.btn-xs.btn-danger(id="delete-inventory_type-{{ inventory_type.id }}",type="button",@click="delete(inventory_type)")
+					//- 	span.glyphicon.glyphicon-trash
+			tr(v-show="pagination")
+				th(colspan="5")
+					pagination(:num='num_inventory_types',:limit='25',:total='total_inventory_types')
+		tbody(v-show="inventory_types.length < 1")
+			tr
+				th.text-center(colspan="5")
+					b No Inventory Types

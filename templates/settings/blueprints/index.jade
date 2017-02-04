@@ -1,0 +1,38 @@
+ol.breadcrumb
+	li Blueprints
+	li
+		button.btn.btn-success.btn-xs(type='button',@click.prevent='update') Update Blueprints
+	input.no-slash.pull-right.form-control(style="margin-top:-0.15%;width:180px;height:28px;padding-left:5px",placeholder="Blueprint Search",v-model='search')
+
+div.table-responsive
+	table.table.table-striped.table-hover.table-condensed
+		thead
+			tr
+				th ID
+				th Name
+				th Eve ID
+				th Manufactured Name
+				th High Profit
+				th Low Profit
+				th Avg Profit
+				th
+		tbody(v-show="blueprints.length > 0")
+			tr(v-for="blueprint in blueprints")
+				th
+					strong {{ blueprint.id }}
+				td {{ blueprint.name }}
+				td {{ blueprint.eve_id }}
+				td {{ blueprint.manufactured_name }}
+				td {{ blueprint.high_profit }}
+				td {{ blueprint.low_profit }}
+				td {{ blueprint.avg_profit }}
+				td.text-right
+					//- button.btn.btn-xs.btn-danger(id="delete-blueprint-{{ blueprint.id }}",type="button",@click="delete(blueprint)")
+					//- 	span.glyphicon.glyphicon-trash
+			tr(v-show="pagination")
+				th(colspan="8")
+					pagination(:num='num_blueprints',:limit='25',:total='total_blueprints')
+		tbody(v-show="blueprints.length < 1")
+			tr
+				th.text-center(colspan="8") 
+					b No Blueprints

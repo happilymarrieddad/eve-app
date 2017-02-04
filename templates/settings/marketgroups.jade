@@ -1,0 +1,32 @@
+ol.breadcrumb
+	li Market Groups
+	li
+		button.btn.btn-success.btn-xs(type='button',@click.prevent='update') Update Market Groups
+	input.no-slash.pull-right.form-control(style="margin-top:-0.15%;width:180px;height:28px;padding-left:5px",placeholder="Market Group Search",v-model='search')
+
+div.table-responsive
+	table.table.table-striped.table-hover.table-condensed
+		thead
+			tr
+				th ID
+				th Name
+				th Description
+				th Eve ID
+				th
+		tbody(v-show="market_groups.length > 0")
+			tr(v-for="market_group in market_groups")
+				th
+					strong {{ market_group.id }}
+				td {{ market_group.name }}
+				td {{ market_group.description }}
+				td {{ market_group.eve_id }}
+				td.text-right
+					//- button.btn.btn-xs.btn-danger(id="delete-market_group-{{ market_group.id }}",type="button",@click="delete(market_group)")
+					//- 	span.glyphicon.glyphicon-trash
+			tr(v-show="pagination")
+				th(colspan="5")
+					pagination(:num='num_market_groups',:limit='25',:total='total_market_groups')
+		tbody(v-show="market_groups.length < 1")
+			tr
+				th.text-center(colspan="5")
+					b No Market Groups

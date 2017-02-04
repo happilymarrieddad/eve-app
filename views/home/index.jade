@@ -1,0 +1,89 @@
+doctype html
+html(lang="en")
+	head
+		title Home Page
+		meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1')
+		
+		link(rel='stylesheet',href='//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/spacelab/bootstrap.min.css')
+		link(rel='stylesheet',href='//gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css')
+		link(rel='stylesheet',href='//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
+
+		link(rel='stylesheet',href='/css/index.css')
+
+	body#app(v-cloak,style='display:none')
+		
+		div.hidden-data.hidden
+			input#server-address(type='text',value=ADDRESS)
+			input#server-port(type='text',value=PORT)
+
+		img(v-show='loading',src='/images/loading.gif',alt='Loading Image',style='position: absolute; margin:auto; left:0; right:0; top:0; bottom:0')
+
+		nav.navbar.navbar-inverse(v-show='authenticated && !loading')
+			div.navbar-inner
+				div.container
+					div.navbar-header
+						button.navbar-toggle.collapsed(type="button",data-toggle="collapse",data-target="#navbar-collapse-1",aria-expanded="false")
+							span.sr-only Toggle Navigation
+							span.icon-bar
+							span.icon-bar
+							span.icon-bar
+					div#navbar-collapse-1.collapse.navbar-collapse
+						ul.nav.navbar-nav
+							li
+								a(href='#!/') Dashboard
+						ul.nav.navbar-nav.navbar-right
+							li.dropdown
+								a.dropdown-toggle(href="#",data-toggle="dropdown",role="button",aria-haspopup="true",aria-expended="false")
+									span Settings
+									span.caret
+								ul.dropdown-menu
+									li
+										a(href='#!/settings/blueprints') Blueprints
+									li
+										a(href='#!/settings/customblueprints') Custom Blueprints
+									li
+										a(href='#!/settings/inventorytypes') Inventory Types
+									li
+										a(href='#!/settings/inventorygroups') Inventory Groups
+									li
+										a(href='#!/settings/marketgroups') Market Groups
+							li.dropdown
+								a.dropdown-toggle(href="#",data-toggle="dropdown",role="button",aria-haspopup="true",aria-expended="false")
+									span {{ username }}
+									span.caret
+								ul.dropdown-menu
+									li
+										a(href="#",@click.prevent='logout') Logout
+
+		div.container-fluid(v-show='completed')
+			div.row
+				div.col-md-12
+					router-view
+
+
+		script(src='//code.jquery.com/jquery-2.1.4.min.js')
+		script(src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js") 
+		script(src="//gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js") 
+		script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js')
+		script(src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js')
+		script(src='//cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js')
+		script(src='//cdnjs.cloudflare.com/ajax/libs/vue-router/0.7.13/vue-router.min.js')
+		script(src='/js/socketcluster.js')
+		script(src='/js/templates.js')
+		script(src='/js/system/common.js')
+
+		script(src='/js/system/pagination.js')
+		script(src='/js/system/filters.js')
+
+		script(src='/js/system/vue.js')
+
+		script(src='/js/pages/dashboard.js')
+		script(src='/js/pages/session/create.js')
+		script(src='/js/pages/settings/inventorytypes.js')
+		script(src='/js/pages/settings/inventorygroups.js')
+		script(src='/js/pages/settings/marketgroups.js')
+		script(src='/js/pages/settings/blueprints.js')
+		script(src='/js/pages/settings/customblueprints.js')
+		script(src='/js/pages/settings/customblueprintedit.js')
+
+		script(src='/js/system/router.js')

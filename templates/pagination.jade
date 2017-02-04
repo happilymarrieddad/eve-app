@@ -1,0 +1,10 @@
+nav
+	ul.pagination(style="margin:0px")
+		li(v-show="$parent.page > 1")
+			a(href="#",@click.prevent="$parent.changePage( $parent.page - 1 )")
+				span &laquo;
+		li.active
+			a {{ $parent.page }}
+		li(v-show="num >= limit && $parent.page != Math.ceil(total / limit)")
+			a(href="#",@click.prevent="$parent.changePage( $parent.page + 1 )")
+				span &raquo;

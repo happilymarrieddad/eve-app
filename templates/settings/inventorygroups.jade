@@ -1,0 +1,30 @@
+ol.breadcrumb
+	li Inventory Groups
+	li
+		button.btn.btn-success.btn-xs(type='button',@click.prevent='update') Update Inventory Groups
+	input.no-slash.pull-right.form-control(style="margin-top:-0.15%;width:180px;height:28px;padding-left:5px",placeholder="Inventory Group Search",v-model='search')
+
+div.table-responsive
+	table.table.table-striped.table-hover.table-condensed
+		thead
+			tr
+				th ID
+				th Name
+				th Eve ID
+				th
+		tbody(v-show="inventory_groups.length > 0")
+			tr(v-for="inventory_group in inventory_groups")
+				th
+					strong {{ inventory_group.id }}
+				td {{ inventory_group.name }}
+				td {{ inventory_group.eve_id }}
+				td.text-right
+					//- button.btn.btn-xs.btn-danger(id="delete-inventory_group-{{ inventory_group.id }}",type="button",@click="delete(inventory_group)")
+					//- 	span.glyphicon.glyphicon-trash
+			tr(v-show="pagination")
+				th(colspan="5")
+					pagination(:num='num_inventory_groups',:limit='25',:total='total_inventory_groups')
+		tbody(v-show="inventory_groups.length < 1")
+			tr
+				th.text-center(colspan="5") 
+					b No Inventory Groups

@@ -1,0 +1,56 @@
+ol.breadcrumb
+	li
+		a(href='#!/settings/customblueprints') Blueprints
+	li
+		span {{ name }}
+
+div.well
+	div.row
+		div.col-md-6
+			form.form.form-horizontal
+				div.form-group
+					label Name
+					input.form-control.input-sm(type='text',v-model='name',disabled=true)
+				div.form-group
+					label Eve ID
+					input.form-control.input-sm(type='text',v-model='eve_id',disabled=true)
+				div.form-group
+					label Manufactured Item
+					input.form-control.input-sm(type='text',v-model='manufactured_inventory_type_name',disabled=true)
+		div.col-md-6
+			ul.nav.nav-tabs(role='tablist')
+				li.active(role='presentation')
+					a(href='#customblueprints-items',aria-controls='customblueprints-items',role='tab',data-toggle='tab') Items
+				//- li(role='presentation')
+				//- 	a(href='#customblueprints-extra',aria-controls='customblueprints-extra',role='tab',data-toggle='tab') Extra
+			div.tab-content
+				div#customblueprints-items.tab-pane.fade.in.active.well
+					table.table.table-condensed.table-hover.table-stripped
+						thead
+							tr
+								th Name
+								th ME1 Quantity
+								th ME10 Quantity
+								th
+						tbody
+							tr(v-for='custom_blueprints_inventory_type in custom_blueprints_inventory_types')
+								th {{ custom_blueprints_inventory_type.inventory_types_name }}
+								th {{ custom_blueprints_inventory_type.me_1_quantity }}
+								th {{ custom_blueprints_inventory_type.me_10_quantity }}
+								th
+									button.btn.btn-xs.btn-danger(id="delete-custom_blueprints_inventory_types-{{ custom_blueprints_inventory_type.id }}",type="button",@click="deleteCustomBlueprintsInventoryTypes(custom_blueprints_inventory_type)")
+										span.glyphicon.glyphicon-trash
+						thead
+							tr
+								th
+									input#customblueprint-edit-inventory-type.form-control.input-sm(type='text')
+								th
+									input.form-control.input-sm(type='text',v-model='add_me_1_quantity')
+								th
+									input.form-control.input-sm(type='text',v-model='add_me_10_quantity',disabled=true)
+								th
+									button.btn.btn-xs.btn-success(type='button',@click='createCustomBlueprintsInventoryType')
+										span.glyphicon.glyphicon-plus
+
+				//- div#customblueprints-extra.tab-pane.fade
+				//- 	h5 Extra
