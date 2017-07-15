@@ -1,10 +1,10 @@
 var gulp = require('gulp'),
-	config = require('config.json'),
+	fs = require('fs'),
+	config = JSON.parse(fs.readFileSync('./config.json')),
 	async = require('async'),
 	templatizer = require('templatizer'),
 	SocketCluster = require('socketcluster').SocketCluster,
 	socketCluster = null, // set to null before we initialize
-	fs = require('fs'),
 	moment = require('moment'),
 	exec = require('child_process').exec
 
