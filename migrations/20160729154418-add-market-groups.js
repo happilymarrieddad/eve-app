@@ -15,7 +15,7 @@ exports.up = function(db, callback) {
 				'ALTER TABLE market_groups',
 				'ADD updated_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP',
 				'ON UPDATE CURRENT_TIMESTAMP,',
-				'ADD created_at timestamp NOT NULL'
+				'ADD created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP'
 			].join(' '),function (err) {
 				if (err) { callback(err);return }
 				db.connection.query([
