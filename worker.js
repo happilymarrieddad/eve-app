@@ -1,7 +1,7 @@
 var fs = require('fs'),
     express = require('express'),
     serveStatic = require('serve-static'),
-    config = require('config.json'),
+    config = JSON.parse(fs.readFileSync('./config.json')),
     path = require('path')
 
 module.exports.run = function (worker) {
