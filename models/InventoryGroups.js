@@ -153,7 +153,7 @@ InventoryGroups.prototype.index = function (search,page,limit,respond) {
 		qry += ' WHERE (inventory_groups.name LIKE "%'+search+'%")'
 	}
 
-	qry += ' GROUP BY inventory_groups.name LIMIT ' + limit + ' OFFSET ' + offset
+	qry += ' LIMIT ' + limit + ' OFFSET ' + offset
 
 	pool.query(qry,function(err,rows) {
 		if (err) { console.log('InventoryGroups.prototype.all');console.log(err);respond('Failed to get all inventory_groups') }
