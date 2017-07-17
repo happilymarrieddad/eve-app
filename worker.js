@@ -1,7 +1,7 @@
 var fs = require('fs'),
     express = require('express'),
     serveStatic = require('serve-static'),
-    config = require('config.json'),
+    config = JSON.parse(fs.readFileSync('./config.json')),
     path = require('path')
 
 module.exports.run = function (worker) {
@@ -11,6 +11,7 @@ module.exports.run = function (worker) {
     process.env = config
     var pool = require('mysql').createPool({
         host            : process.env.DB_HOST,
+        port            : process.env.DB_PORT || 3306,
         user            : process.env.DB_USERNAME,
         password        : process.env.DB_PASSWORD,
         database        : process.env.DB_DATABASE
