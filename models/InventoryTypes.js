@@ -410,7 +410,6 @@ InventoryTypes.prototype.index = function (search,page,limit,respond) {
 	}
 
 	qry += ' LIMIT ' + limit + ' OFFSET ' + offset
-  console.log(qry)
 
 	pool.query(qry,function(err,rows) {
 		if (err) { console.log('InventoryTypes.prototype.all');console.log(err);respond('Failed to get all inventory_types') }
@@ -432,7 +431,6 @@ InventoryTypes.prototype.indexCount = function (search,respond) {
 	if (search) {
 		qry += ' WHERE (inventory_types.name LIKE "%'+search+'%" OR market_groups.name LIKE "%'+search+'%")'
 	}
-  console.log(qry)
 
 	pool.query(qry,function(err,rows) {
 		if (err) { console.log('InventoryTypes.prototype.all');console.log(err);respond('Failed to get all inventory_types') }
