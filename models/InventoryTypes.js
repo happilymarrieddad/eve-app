@@ -397,9 +397,19 @@ InventoryTypes.prototype.index = function (search,page,limit,respond) {
 
 	if (search) {
 		qry += ' WHERE (inventory_types.name LIKE "%'+search+'%" OR market_groups.name LIKE "%'+search+'%")'
+		qry += ' AND (inventory_types.id IN (' +
+		       'SELECT MIN(inventory_types.id) FROM inventory_types LEFT JOIN market_groups ON market_groups.id = inventory_types.market_group_id ' +
+		       'WHERE (inventory_types.name LIKE "%'+search+'%" OR market_groups.name LIKE "%'+search+'%") ' +
+		       'GROUP BY inventory_types.name' +
+		       '))'
+	} else {
+		qry += ' WHERE inventory_types.id IN ('+
+		       'SELECT MIN(inventory_types.id) FROM inventory_types LEFT JOIN market_groups ON market_groups.id = inventory_types.market_group_id ' +
+		       'GROUP BY inventory_types.name' +
+		       ')'
 	}
 
-	qry += ' GROUP BY inventory_types.name LIMIT ' + limit + ' OFFSET ' + offset
+	qry += ' LIMIT ' + limit + ' OFFSET ' + offset
 
 	pool.query(qry,function(err,rows) {
 		if (err) { console.log('InventoryTypes.prototype.all');console.log(err);respond('Failed to get all inventory_types') }
@@ -413,7 +423,7 @@ InventoryTypes.prototype.indexCount = function (search,respond) {
 	var qry =
 	'SELECT ' +
 
-	'COUNT(*) ' +
+	'COUNT(DISTINCT inventory_types.name) AS cnt ' +
 
 	'FROM inventory_types ' +
 	'LEFT JOIN market_groups ON market_groups.id = inventory_types.market_group_id'
@@ -425,7 +435,7 @@ InventoryTypes.prototype.indexCount = function (search,respond) {
 	pool.query(qry,function(err,rows) {
 		if (err) { console.log('InventoryTypes.prototype.all');console.log(err);respond('Failed to get all inventory_types') }
 		else if (!rows.length) { respond(null,0) }
-		else { respond(null,rows[0]['COUNT(*)']) }
+		else { respond(null,rows[0]['cnt']) }
 	})
 }
 

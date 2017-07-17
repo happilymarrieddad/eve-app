@@ -148,7 +148,7 @@ MarketGroups.prototype.index = function (search,page,limit,respond) {
 		qry += ' WHERE (market_groups.name LIKE "%'+search+'%")'
 	}
 
-	qry += ' GROUP BY market_groups.name LIMIT ' + limit + ' OFFSET ' + offset
+	qry += ' LIMIT ' + limit + ' OFFSET ' + offset
 
 	pool.query(qry,function(err,rows) {
 		if (err) { console.log('MarketGroups.prototype.all');console.log(err);respond('Failed to get all market_groups') }
